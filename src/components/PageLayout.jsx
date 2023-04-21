@@ -54,6 +54,7 @@ function PageLayout(props) {
                         </Typography>
                     </Link>
                     <Box display='flex' alignItems='center'>
+                        {/* Regular Menu --------------------------------------------------------------------------------- */}
                         {matches ? (
                             <Box display='flex' gap='20px' mr='10px'>
                                 <RenderRoutes weight='900' />
@@ -63,7 +64,7 @@ function PageLayout(props) {
                         )}
                     </Box>
                 </Toolbar>
-                {/* Mobile Menu ----------------------------------------------------------------------------------------------- */}
+                {/* Mobile Menu ------------------------------------------------------------------------------------------- */}
                 {showMenu && matches === false && (
                     <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'space-around' }}>
                         <RenderRoutes weight='900' />
