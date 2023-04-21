@@ -1,5 +1,5 @@
-import React from 'react'
-import { AppBar, Box, Link, Toolbar, Typography, useTheme, useMediaQuery } from '@mui/material';
+import React, { useState } from 'react'
+import { AppBar, Box, Link, Toolbar, Typography, useTheme, useMediaQuery, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -10,10 +10,28 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
     zIndex: 10000,
 }));
 
+const RenderRoutes = ({ weight }) => {
+    const NavTypography = styled(Typography)(() => ({
+        fontWeight: weight ? weight : ''
+    }));
+
+    return (
+        <>
+            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                <NavTypography>Home</NavTypography>
+            </Link>
+            <Link href="/test" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                <NavTypography>Test</NavTypography>
+            </Link>
+        </>
+    )
+}
+
 
 function PageLayout(props) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('md'));
+    const [showMenu, setShowMenu] = useState(false)
 
 
     return (
@@ -35,14 +53,22 @@ function PageLayout(props) {
                             LOGO
                         </Typography>
                     </Link>
-                    <Box display={'flex'} alignItems={'center'}>
-                        <Box sx={{ marginLeft: '18px', textAlign: 'center', background: theme.colors.lighterGrey, padding: '8px 17px', borderRadius: '8px' }}>
-                            <Typography sx={{ color: theme.colors.darkerGrey, fontSize: '12px', fontWeight: 600 }}>
-                                {'Sign Out'}
-                            </Typography>
-                        </Box>
+                    <Box display='flex' alignItems='center'>
+                        {matches ? (
+                            <Box display='flex' gap='20px' mr='10px'>
+                                <RenderRoutes weight='900' />
+                            </Box>
+                        ) : (
+                            <Button variant="contained" onClick={() => setShowMenu(!showMenu)}>Menu</Button>
+                        )}
                     </Box>
                 </Toolbar>
+                {/* Mobile Menu ----------------------------------------------------------------------------------------------- */}
+                {showMenu && matches === false && (
+                    <Box sx={{ display: 'flex', alignContent: 'center', justifyContent: 'space-around' }}>
+                        <RenderRoutes weight='900' />
+                    </Box>
+                )}
             </StyledAppBar>
             {/* // END HEADER --------------------------------------------------------------------------------------------- */}
             <Box sx={{ display: 'flex', minHeight: '100vh', overflow: 'hidden' }}>
@@ -51,6 +77,7 @@ function PageLayout(props) {
                         background: '#fff',
                         overflowY: 'auto',
                         height: theme.drawer.calcHeight,
+                        marginTop: showMenu && matches === false ? '24px' : '',
                         width: '100%',
                         // padding: '65px 36px 0px 36px',
                         // marginTop: theme.drawer.height,
