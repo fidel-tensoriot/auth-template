@@ -6,6 +6,10 @@ The landing page will be integrated with Amazon Location Services so that we can
 -   User Pool - Authentication flow, Authorization, User data and roles.
 -   Identity Pool - Give your users access to AWS resources, such as an Amazon Simple Storage Service (Amazon S3) bucket or an Amazon DynamoDB table o temporary credentials.
 
+## Run Locally
+
+TO run the app, install the packages using the command at the project root `npm install` and once packages are done you can run `npm run start` to run the local server.
+
 ## Table of Contents
 
 -   [Auth Template](#auth-template)
