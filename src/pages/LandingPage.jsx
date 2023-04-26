@@ -7,6 +7,8 @@ import "@aws-amplify/ui-react/styles.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "maplibre-gl-js-amplify/dist/public/amplify-map.css";
 import LineChart1 from '../components/LineChart1';
+import LineChart2 from '../components/LineChart2';
+
 import { tempData, humidityData } from '../data/SimulatedData'
 
 const test = [{ latitude: 33.8, longitude: -117.4, color: "red" }];
@@ -53,8 +55,7 @@ function LandingPage() {
                 }}>
                     <LineChart1 title='Temperature' data={tempData} xTitle='time' yTitle='temp' />
                     <LineChart1 title='Humidity' data={humidityData} xTitle='time' yTitle='humidity' />
-                    {/* <LineChart1 title='Humidity' />
-                    <LineChart1 title='Sound' /> */}
+                    <LineChart2 />
                 </Box>
             </div>
         </>
